@@ -1,4 +1,4 @@
-FROM arm64v8/alpine:3.7
+FROM arm32v6/alpine:3.7
 MAINTAINER Michael Ruettgers <michael@ruettgers.eu>
 
 ENV BUILD_PACKAGES \
