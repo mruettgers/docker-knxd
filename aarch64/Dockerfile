@@ -1,4 +1,4 @@
-FROM hypriot/rpi-alpine
+FROM arm64v8/alpine:3.7
 MAINTAINER Michael Ruettgers <michael@ruettgers.eu>
 
 ENV BUILD_PACKAGES \
@@ -21,12 +21,14 @@ ENV BUILD_PACKAGES \
 
 ENV PACKAGES \
   dev86 \
+  libusb \
+  libev \
   libstdc++
 
 RUN set -xe && \
-  apk --no-cache update && \
+  cd /tmp && \
   apk --no-cache add ${BUILD_PACKAGES} ${PACKAGES} && \
-  git clone https://github.com/knxd/knxd.git && \
+	git clone https://github.com/knxd/knxd.git && \
   cd knxd && \
   ./bootstrap.sh && \
   ./configure --disable-systemd --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel && \
