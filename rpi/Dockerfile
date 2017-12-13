@@ -1,4 +1,4 @@
-FROM arm32v6/alpine:3.7
+FROM arm32v6/alpine:3.6
 MAINTAINER Michael Ruettgers <michael@ruettgers.eu>
 
 ENV BUILD_PACKAGES \
@@ -33,7 +33,7 @@ RUN set -xe && \
   ./bootstrap.sh && \
   ./configure --disable-systemd --enable-eibnetip --enable-eibnetserver --enable-eibnetiptunnel && \
   mkdir -p src/include/sys && ln -s /usr/lib/bcc/include/sys/cdefs.h src/include/sys && \
-  make && \
+  make V=1 && \
   make install && \
   cd .. && rm -rf knxd && apk --no-cache --purge del ${BUILD_PACKAGES}
 
